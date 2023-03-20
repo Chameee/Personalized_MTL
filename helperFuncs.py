@@ -7,7 +7,8 @@ import pickle
 from scipy import stats
 from sklearn.metrics import roc_auc_score, f1_score, precision_score, recall_score
 import ast
-import tensorflow as tf 
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 
 NAN_FILL_VALUE = 0
 
@@ -432,12 +433,12 @@ def getSvmPartitionDf(data_df, wanted_feats, wanted_labels, dataset='Train'):
 def getTensorFlowMatrixData(data_df, wanted_feats, wanted_labels, dataset='Train',single_output=False):
 	set_df = data_df[data_df['dataset']==dataset]
 	
-	X = set_df[wanted_feats].astype(float).as_matrix()
+	X = set_df[wanted_feats].astype(float).to_numpy()
 
 	if single_output:
 		y = set_df[wanted_labels[0]].tolist()
 	else:
-		y = set_df[wanted_labels].as_matrix()
+		y = set_df[wanted_labels].to_numpy()
 	
 	X = convertMatrixToTensorFlowFriendlyFormat(X)
 	y = convertMatrixToTensorFlowFriendlyFormat(y)
@@ -638,7 +639,7 @@ def get_test_predictions_for_df_with_task_column(model_predict_func, csv_path, t
 		print("FINAL METRICS ON TEST SET:", 
 			  computeAllMetricsForPreds(all_preds, all_true))
 	else:
-		print("Cannot print(test results unless wanted_label is set correctly"))
+		print("Cannot print(test results unless wanted_label is set correctly")
 
 	return data_df
 
