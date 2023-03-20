@@ -638,7 +638,7 @@ def get_test_predictions_for_df_with_task_column(model_predict_func, csv_path, t
 		print("FINAL METRICS ON TEST SET:", 
 			  computeAllMetricsForPreds(all_preds, all_true))
 	else:
-		print("Cannot print test results unless wanted_label is set correctly")
+		print("Cannot print(test results unless wanted_label is set correctly"))
 
 	return data_df
 

@@ -39,7 +39,7 @@ from LSSVM import LSSVM
 
 def reloadFiles():
 	reload(helper)
-	print "Cannot reload LSSVM because of the way it was imported"
+	print("Cannot reload LSSVM because of the way it was imported")
 
 
 reloadFiles()
@@ -100,7 +100,7 @@ class MTMKL:
 		self.verbose=verbose
 		self.drop20 = drop20PercentTrainingData
 
-		if self.debug: print "MTMKL class has been initialized with", self.n_tasks, "tasks and", self.n_views, "sensors"
+		if self.debug: print("MTMKL class has been initialized with", self.n_tasks, "tasks and", self.n_views, "sensors")
 
 	@staticmethod
 	def getModalityNamesIndices(task_dict_list):
@@ -187,8 +187,8 @@ class MTMKL:
 
 	def computeObjectiveFunction(self,eta_from_fmin):
 		eta_from_fmin = eta_from_fmin.reshape(self.n_tasks,-1)
-		#if self.debug: print "eta:", eta_from_fmin
-		if self.debug: print "sum eta per task:", np.sum(eta_from_fmin,axis=1)
+		#if self.debug: print("eta:", eta_from_fmin)
+		if self.debug: print("sum eta per task:", np.sum(eta_from_fmin,axis=1))
 		if self.save_etas:
 			self.saveEtas()
 		self.eta = eta_from_fmin
@@ -196,8 +196,8 @@ class MTMKL:
 		#steps 1 and 2 of Kandemir algorithm
 		for t in range(self.n_tasks):
 			if self.debug: 
-				print "Training task", t
-				print "etas have size", self.eta.shape
+				print("Training task", t)
+				print("etas have size", self.eta.shape)
 				sys.stdout.flush()
 
 			X_t, Y_t = self.extractTaskData(self.train_tasks,t,drop20=self.drop20)
@@ -227,10 +227,10 @@ class MTMKL:
 		obj_value += self.regularizer_func()
 
 		if self.debug: 
-			print "obj function value:", obj_value
-			print "Eta difference:",self.computeEtaDifference()
-			print "Training ACC", self.predictAndGetAccuracy(self.train_tasks)
-			print 
+			print("obj function value:", obj_value)
+			print("Eta difference:",self.computeEtaDifference())
+			print("Training ACC", self.predictAndGetAccuracy(self.train_tasks))
+			print()
 
 		return obj_value
 
@@ -323,9 +323,9 @@ class MTMKL:
 		self.eta = res.x.reshape(self.n_tasks,-1)
 
 		if self.verbose: 
-			print "Results of this run!"
-			print "\t ETA", self.eta
-			print "\t Training ACC", self.predictAndGetAccuracy(self.train_tasks)
+			print("Results of this run!")
+			print("\t ETA", self.eta)
+			print("\t Training ACC", self.predictAndGetAccuracy(self.train_tasks))
 
 		return True
 
@@ -411,8 +411,8 @@ class MTMKL:
 		preds = self.internal_predict(X_t, int(task))
 
 		if debug:
-			print "y_t:", y_t
-			print "preds:", preds
+			print("y_t:", y_t)
+			print("preds:", preds)
 		
 		acc = helper.getBinaryAccuracy(preds,y_t)
 		if len(y_t) > 1 and helper.containsEachSVMLabelType(y_t) and helper.containsEachSVMLabelType(preds):

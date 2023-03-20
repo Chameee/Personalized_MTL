@@ -41,8 +41,8 @@ class MainDistribution():
         self.set_up_dists()
 
     def set_up_dists(self):
-        # print [self.point_centers_matrix[j][0] for j in range(len(self.point_centers_matrix))]
-        # print [self.point_centers_matrix[j][1] for j in range(len(self.point_centers_matrix))]
+        # print([self.point_centers_matrix[j][0] for j in range(len(self.point_centers_matrix))])
+        # print([self.point_centers_matrix[j][1] for j in range(len(self.point_centers_matrix))])
         self.dists = [SubDistribution(self.gauss_weight, self.point_dist_weight,
                                       [self.point_centers_matrix[j][i] for j in range(len(self.point_centers_matrix))],
                                       self.point_weights, self.mu, self.sigma) for i in
@@ -79,8 +79,8 @@ def test_single_distribution():
 
     samples = distribution.rvs(size=1000)
 
-    print "Percent of samples at 0", sum(abs(samples) < 1e-13) / float(len(samples))
-    print "Percent of samples at 2", sum(abs(samples - 2.39994) < 1e-13) / float(len(samples))
+    print("Percent of samples at 0", sum(abs(samples) < 1e-13) / float(len(samples)))
+    print("Percent of samples at 2", sum(abs(samples - 2.39994) < 1e-13) / float(len(samples)))
 
     plt.hist(samples, bins=np.arange(-4, 4, .25), normed=True)
     plt.plot(x_vals, distribution.pdf(x_vals))
