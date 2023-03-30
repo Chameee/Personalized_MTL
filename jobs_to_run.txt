@@ -1,7 +1,3 @@
 NN job of some type - happiness
-python3 NeuralNetworks/tensorFlowWrapper.py datasetTaskList-example_data_ multitask wellbeing
+python3 NeuralNetworks/tensorFlowWrapper.py datasetTaskList-ac_clean_num_ multitask wellbeing
 ../outputs/some_result_for_happiness.txt
-
-NN job of some type - calmness
-python3 NeuralNetworks/tensorFlowWrapper.py datasetTaskList-example_data_ multitask wellbeing
-../outputs/some_result_for_calmness.txt

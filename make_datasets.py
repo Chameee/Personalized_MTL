@@ -53,8 +53,8 @@ def getDatasetCoreNameAndPath(datafile):
 def getLabelTaskListFromDataset(datafile, subdivide_phys=True):
 	"""Partitions a .csv file into a task-dict-list pickle file by separating
 	related labels into the different tasks."""
-	df = pd.read_csv(datafile)
-	wanted_labels = [x for x in df.columns.values if '_Label' in x and 'tomorrow_' in x and 'Evening' in x and 'Alertness' not in x and 'Energy' not in x]
+	df = pd.read_csv(datafile, low_memory=False)
+	wanted_labels = [x for x in df.columns.values if '_Label' in x]
 	wanted_feats = [x for x in df.columns.values if x != 'user_id' and x != 'timestamp' and x!= 'dataset' and x!='Cluster' and '_Label' not in x]
 
 	core_name, data_path = getDatasetCoreNameAndPath(datafile)
